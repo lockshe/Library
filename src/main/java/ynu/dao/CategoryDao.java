@@ -1,0 +1,106 @@
+package ynu.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
+
+import ynu.entity.Category;
+
+
+@Repository
+public interface CategoryDao {
+
+	 /**
+     * 通过分类名获取ID
+     *
+     * @param name 分类名
+     *
+     * @return {@link Integer}
+     */
+    @Select("select id from category where name=#{name}")
+    int getIdByName(String name);
+
+    /**
+     * 添加一个分类
+     *
+     * @param name 分类名
+     *
+     * @return 是否添加成功
+     */
+    @Insert("insert into category(name) values(#{name})")
+    boolean insertCategory(String name);
+
+    /**
+     * 通过编号删除一个分类
+     *
+     * @param id 编号
+     *
+     * @return 是否删除成功
+     */
+    @Delete("delete from category where id=#{id}")
+    boolean removeCategoryById(int id);
+
+    /**
+     * 通过名称删除一个分类
+     *
+     * @param name 分类名称
+     *
+     * @return 是否删除成功
+     */
+    @Delete("delete from category where name=#{name}")
+    boolean removeCategoryByName(String name);
+
+    /**
+     * 更新一个分类名
+     *
+     * @param name 分类名
+     * @param id 分类ID
+     *
+     * @return 是否更新成功
+     */
+    @Update("update category set name=#{name} where id=#{id}")
+    boolean updateNameById(@Param("id") int id, @Param("name") String name);
+
+    /**
+     * 通过分类名更新分类名
+     *
+     * @param newName 新的分类名
+     * @param oldName 旧的分类名
+     */
+    @Update("update category set name=#{newName} where name=#{oldName}")
+    void updateNameByName(String newName, String oldName);
+
+    /**
+     * 获取所有分类
+     *
+     * @return {@link List}
+     */
+    @Select("select * from category")
+    List<Category> listCategory();
+
+    /**
+     * 通过编号获取一个分类
+     *
+     * @param id 编号
+     *
+     * @return {@link Category}
+     */
+    @Select("select * from category where id=#{id}")
+    Category getCategoryById(int id);
+
+    /**
+     * 通过名称获取一个分类
+     *
+     * @param name 名称
+     *
+     * @return {@link Category}
+     */
+    @Select("select * from category where name=#{name}")
+    Category getCategoryByName(String name);
+    
+}

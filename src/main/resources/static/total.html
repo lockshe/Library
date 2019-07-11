@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="themes/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" href="themes/default/easyui.css">
+    <link rel="stylesheet" href="themes/icon.css">
+    <link rel="stylesheet" href="themes/color.css">
+    <script src="js/sortmanage.js"></script>
+    <title>统计报表</title>
+
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+
+        li{
+            list-style: none;
+            font-size:25px;
+            display:inline;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        a:hover{
+            color:red;
+        }
+
+        img{
+            display:inline;
+        }
+
+        img:hover{
+            background-color:white;
+        }
+
+
+
+
+    </style>
+
+</head>
+<body>
+
+<div style="position:fixed;width:100%;height:20%;background:lightskyblue;">
+    <h1 style="position:absolute;top:35%;left:45%;color:antiquewhite">后台管理系统</h1>
+</div>
+
+<div style="position:fixed;height:80%;width:15%;background-color:navajowhite;top:20%">
+    <ul>
+        <li><img style="width:35px;height:20px" src="images/后台管理.png" /><strong>后台管理</strong><img id="add1" style="position:absolute;top:0%;width:35px;height:35px" src="images/add.png" /></li>
+        <li id="li1" style="position:relative;left:10%;display:inline">
+            <ul>
+                <li><img style="width:35px;height:28px" src="images/管理员.png" /><strong>管理员功能</strong><img id="add2" style="position:absolute;top:0%;width:35px;height:35px" src="images/add.png"/></li>
+                <li id="li2" style="display:inline">
+                    <ul style="position:relative;left:10%">
+                        <a href="admin.html"><img style="width:35px;height:28px" src="images/admin.png" /><li>上传记录</li></a><br>
+                        <a href="download.html"><img style="width:35px;height:28px" src="images/download.png" /><li>下载记录</li></a><br>
+                        <a href="filemanage.html"><img style="width:35px;height:28px" src="images/文件管理.png" /><li>文件权限</li></a><br>
+                        <a href="automanage.html"><img style="width:35px;height:28px" src="images/权限管理.png" /><li>用户权限</li></a><br>
+                        <a href="sortmanage.html"><img style="width:35px;height:28px" src="images/manage.png" /><li>分类管理</li></a><br>
+                        <a href="usemanage.html"><img style="width:35px;height:28px" src="images/用户管理.png" /><li>用户管理</li></a><br>
+                        <a href="#"><img style="width:35px;height:28px" src="images/timg.jpg" /><li>统计报表</li></a><br>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
+<div class="container" style="height:100%; position: fixed;left: 20%;top:20%">
+
+    <div class="row" id="sortmanage" style="margin-top: 30px">
+        <div class="col-8 col-sm-5">
+            <table id="sdg" class="easyui-datagrid" title="统计报表" style="width:900px;height:auto"
+                   data-options="
+				iconCls: 'icon-edit',
+				singleSelect: true,
+				toolbar: '#stb',
+				url: '/admin/sum',
+				method: 'get',
+				onClickRow: onClickRow,
+			">
+                <thead>
+                <tr>
+                    <th data-options="field:'name',width:450,editor:'none'">类型</th>
+                   <th data-options="field:'sum',width:450,editor:'none'">数量</th>
+                </tr>
+                </thead>
+            </table>
+            <div id="stb" style="height:auto">
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="add()">增加</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="sremoveit()">删除</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="saccept()">保存</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    var li = false;
+    var li2 = false;
+
+    $("#add1").click(function(){
+
+        if(li == false){
+            $("#li1").css("display","none");
+            li = true;
+        }
+
+        else if(li == true){
+            $("#li1").css("display","inline");
+            li = false;
+        }
+
+    });
+
+
+    $("#add2").click(function(){
+
+        if(li2 == false){
+            $("#li2").css("display","none");
+            li2 = true;
+        }
+
+        else if(li == true){
+            $("#li2").css("display","inline");
+            li2 = false;
+        }
+
+    });
+
+</script>
+</body>
+</html>

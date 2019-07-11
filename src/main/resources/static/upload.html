@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="images/efo-favicon.png"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <link rel="stylesheet" href="css/glyphicons.css">
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/layer.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/piexif.min.js"></script>
+    <script src="js/sortable.min.js"></script>
+    <script src="js/purify.min.js"></script>
+    <script src="js/fileinput.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/utils.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+    <title>上传</title>
+</head>
+<body id="particles-js">
+		<script>
+		$.get("/category/all", function(data) {
+			var json = JSON.parse(data);
+			var option = "";
+			$.each(json, function(i, category) {
+				option += "<option value='" + category.name + "'>"
+						+ category.name + "</option>";
+			});
+			if (!isEmpty(option)) {
+				$("#edit-file-category").html(option);
+			}
+			
+			option = "";
+			$.each(json, function(i, category) {
+				option += "<option value=" + category.id + ">"
+						+ category.name + "</option>";
+			});
+			if (!isEmpty(option)) {
+				$("#category-id").append(option);
+			}
+		});
+	</script>
+	<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-10 offset-1 offset-sm-0">
+            <div class="row content-box rounded">
+                <div class="col-sm-12 col-12 offset-sm-0">
+                    <br/>
+                    <div class="row form-inline">
+                        <div class="col-sm-3 col-5">
+                            <select id="category-id" class="form-control w-100" title="分类" data-toggle="tooltip">
+                                <option value="0">未分类</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                <div class="col-sm-12 col-12 offset-sm-0">
+                    <textarea class="form-control" rows="5" id="description" title="描述" placeholder="文件描述"></textarea>
+                </div>
+                <div class="col-sm-12 col-12 offset-sm-0"><br/>
+                    <input id="file-input" class="form-control file" multiple data-max-file-count="100" name="file"
+                           type="file"/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row text-center" id="footer"></div>
+    <br/>
+</div>
+<script src="js/particles.js"></script>
+<script src="js/default.js"></script>
+<script src="js/upload.js"></script>
+</body>
+</html>
